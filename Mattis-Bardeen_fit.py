@@ -632,7 +632,7 @@ class analyze_data(object):
         #    str_leg.append(r"$\alpha$ = %.3f, $f_0$ = %.4f MHz, $\Delta$ = %.3e, err = %.2f" %(alpha, f0*1e-6, Delta, fopt*1e-6))
         #plt.legend(str_leg, fontsize = 14, loc=3)
         plt.xlabel('Temperature [mK]', fontsize=34)
-        plt.ylabel(r'$\delta f(T) / f(0) \quad \times 10^3$ ', fontsize=34)
+        plt.ylabel(r'$\delta f_{res}(T) / f_{res}(0) \quad \times 10^3$ ', fontsize=34)
         plt.xticks(color='k', size=30)
         plt.yticks(color='k', size=30)
         plt.grid()
