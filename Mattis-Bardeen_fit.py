@@ -13,9 +13,9 @@ from tkinter import filedialog
 from matplotlib.widgets import Slider, Button
 import os
 import sys
-#sys.path.append('/home/ubadmin/Documents/Caltech/local_python_library/scraps-master/')
+sys.path.append('/home/ubadmin/Documents/Caltech/local_python_library/')
 #sys.path.append('C:/Users/DELL E7270/Documents/Documents/Travail/Caltech/local_python_library/')
-#import scraps as scr
+import scraps as scr
 import glob
 from scipy.interpolate import interp1d
 from pyswarm import pso
@@ -370,7 +370,7 @@ class analyze_data(object):
         
         fig1, ax1 = plt.subplots(figsize=(width_screen/mydpi, height_screen/mydpi), dpi=mydpi)
         fig1.canvas.set_window_title('Qi VS Temp') 
-        plt.subplots_adjust(bottom=0.11, top=0.96, right=0.97, left=0.1)
+        plt.subplots_adjust(bottom=0.11, top=0.96, right=0.97, left=0.11)
         med = [np.median(a) for a in qi_data]
         for i in range(len(T_data[0])):
             T = [a[i] for a in T_data]
@@ -379,10 +379,10 @@ class analyze_data(object):
         min_Qi = max([min([min(a) for a in qi_data])*0.85, min(med)/3])
         max_Qi = min([max([max(a) for a in qi_data])*1.15, max(med)*3])
         plt.yscale('log')
-        plt.xlabel('Temperature [mK]', fontsize=30)
-        plt.ylabel('Qi', fontsize=30)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
+        plt.xlabel('Temperature [mK]', fontsize=34)
+        plt.ylabel('Qi', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
         plt.ylim(min_Qi, max_Qi)
         plt.tick_params(axis='y', which='minor', labelsize=26)
         plt.grid(True, which="both") 
@@ -390,7 +390,7 @@ class analyze_data(object):
 
         fig2, ax2 = plt.subplots(figsize=(width_screen/mydpi, height_screen/mydpi), dpi=mydpi)
         fig2.canvas.set_window_title('Histogram Qi') 
-        plt.subplots_adjust(bottom=0.12, top=0.95, right=0.97, left=0.09)
+        plt.subplots_adjust(bottom=0.12, top=0.95, right=0.97, left=0.1)
         qi_hist = np.concatenate(qi_data)
         bins = np.logspace(np.log10(np.min(qi_hist)), np.log10(np.max(qi_hist)), 12)
 #        med = [np.median(a) for a in qi_data]
@@ -398,10 +398,10 @@ class analyze_data(object):
 #        max_Qi = min([max([max(a) for a in qi_data])*1.05, max(med)*3])
         plt.hist( qi_data, alpha = 0.7, bins=bins)
         plt.xscale('log')
-        plt.xlabel('Qi', fontsize=30)
-        plt.ylabel('Number of resonances', fontsize=30)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
+        plt.xlabel('Qi', fontsize=34)
+        plt.ylabel('Number of resonances', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
         plt.legend([str(int(a[0]*1e3)) + ' mK' for a in T_data], fontsize=26)
         plt.xlim(min_Qi, max_Qi)
 #        ax2.ticklabel_format(axis='x', style='sci', scilimits=(0,0))
@@ -413,7 +413,7 @@ class analyze_data(object):
 
         fig3, ax3 = plt.subplots(figsize=(width_screen/mydpi, height_screen/mydpi), dpi=mydpi)
         fig3.canvas.set_window_title('Qc VS Temp') 
-        plt.subplots_adjust(bottom=0.11, top=0.96, right=0.97, left=0.1)
+        plt.subplots_adjust(bottom=0.11, top=0.96, right=0.97, left=0.11)
         for i in range(len(T_data[0])):
             T = [a[i] for a in T_data]
             Qc = [a[i] for a in qc_data]
@@ -422,10 +422,10 @@ class analyze_data(object):
         min_Qc = max([min([min(a) for a in qc_data])*0.85, min(med)/5])
         max_Qc = min([max([max(a) for a in qc_data])*1.15, max(med)*5])
         plt.yscale('log')
-        plt.xlabel('Temperature [mK]', fontsize=30)
-        plt.ylabel('Qc', fontsize=30)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
+        plt.xlabel('Temperature [mK]', fontsize=34)
+        plt.ylabel('Qc', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
         plt.ylim(min_Qc, max_Qc)
         plt.tick_params(axis='y', which='minor', labelsize=26)
         plt.grid(True, which="both") 
@@ -433,7 +433,7 @@ class analyze_data(object):
         
         fig4, ax4 = plt.subplots(figsize=(width_screen/mydpi, height_screen/mydpi), dpi=mydpi)
         fig4.canvas.set_window_title('Histogram Qc') 
-        plt.subplots_adjust(bottom=0.12, top=0.95, right=0.97, left=0.09)
+        plt.subplots_adjust(bottom=0.12, top=0.95, right=0.97, left=0.1)
         qc_hist = np.concatenate(qc_data)
         bins = np.logspace(np.log10(np.min(qc_hist)), np.log10(np.max(qc_hist)), 12)
 #        med = [np.median(a) for a in qi_data]
@@ -441,10 +441,10 @@ class analyze_data(object):
 #        max_Qi = min([max([max(a) for a in qi_data])*1.05, max(med)*3])
         plt.hist( qc_data, alpha = 0.7, bins=bins)
         plt.xscale('log')
-        plt.xlabel('Qc', fontsize=30)
-        plt.ylabel('Number of resonances', fontsize=30)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
+        plt.xlabel('Qc', fontsize=34)
+        plt.ylabel('Number of resonances', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
         plt.legend([str(int(a[0]*1e3)) + ' mK' for a in T_data], fontsize=26)
         plt.xlim(min_Qc, max_Qc)
 #        ax2.ticklabel_format(axis='x', style='sci', scilimits=(0,0))
@@ -626,15 +626,15 @@ class analyze_data(object):
             Tnew = np.linspace(Tlist_arr[i][0],Tlist_arr[i][-1],100)
             dfvsf0_fit_smooth = interp1d(Tlist_arr[i], dfvsf0_fit, kind='cubic')
             color = plt.cm.tab20(i%20)
-            plt.plot(Tnew*1e3,dfvsf0_fit_smooth(Tnew)*1e3,  color=color)
-            plt.plot(Tlist_arr[i]*1e3, dfvsf0*1e3, 'o', markersize = 8,  color=color)
-            plt.plot(Tlist_arr[i]*1e3, dfvsf0_fit*1e3, 'x', markersize = 8,  color=color)
+            plt.plot(Tnew*1e3,dfvsf0_fit_smooth(Tnew)*1e3,  color=color, linewidth = 2)
+            plt.plot(Tlist_arr[i]*1e3, dfvsf0*1e3, 'o', markersize = 10, linewidth = 2, color=color)
+            plt.plot(Tlist_arr[i]*1e3, dfvsf0_fit*1e3, 'x', markersize = 10, linewidth = 2, color=color)
         #    str_leg.append(r"$\alpha$ = %.3f, $f_0$ = %.4f MHz, $\Delta$ = %.3e, err = %.2f" %(alpha, f0*1e-6, Delta, fopt*1e-6))
         #plt.legend(str_leg, fontsize = 14, loc=3)
-        plt.xlabel('Temperature [mK]', fontsize=28)
-        plt.ylabel(r'[f(T) - f(0)] / f(0)    $\times 10^3$ ', fontsize=28)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
+        plt.xlabel('Temperature [mK]', fontsize=34)
+        plt.ylabel(r'$\delta f(T) / f(0) \quad \times 10^3$ ', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
         plt.grid()
 
         fig20, ax20 = plt.subplots(figsize=(width_screen/mydpi, height_screen/mydpi), dpi=mydpi)
@@ -646,15 +646,15 @@ class analyze_data(object):
             Tnew = np.linspace(Tlist_arr[i][0],Tlist_arr[i][-1],100)
             d_1vsQi_fit_smooth = interp1d(Tlist_arr[i],d_1vsQi_fit, kind='cubic')
             color = plt.cm.tab20(i%20)
-            plt.plot(Tnew*1e3,d_1vsQi_fit_smooth(Tnew)*1e3,  color=color)
-            plt.plot(Tlist_arr[i]*1e3, d_1vsQi*1e3, 'o', markersize = 8,  color=color)
-            plt.plot(Tlist_arr[i]*1e3, d_1vsQi_fit*1e3, 'x', markersize = 8,  color=color)
+            plt.plot(Tnew*1e3,d_1vsQi_fit_smooth(Tnew)*1e5,  color=color, linewidth = 2)
+            plt.plot(Tlist_arr[i]*1e3, d_1vsQi*1e5, 'o', markersize = 10, linewidth = 2, color=color)
+            plt.plot(Tlist_arr[i]*1e3, d_1vsQi_fit*1e5, 'x', markersize = 10, linewidth = 2,  color=color)
         #    str_leg.append(r"$\alpha$ = %.3f, $f_0$ = %.4f MHz, $\Delta$ = %.3e, err = %.2f" %(alpha, f0*1e-6, Delta, fopt*1e-6))
         #plt.legend(str_leg, fontsize = 14, loc=3)
-        plt.xlabel('Temperature [mK]', fontsize=28)
-        plt.ylabel(r'[1/Qi(T) - 1/Qi(0)]   $\times 10^3$ ', fontsize=28)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
+        plt.xlabel('Temperature [mK]', fontsize=34)
+        plt.ylabel(r'$\delta \left[1/Qi(T)\right] \quad \times 10^5$ ', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
         plt.grid()
         
         alpha_hist, alpha_bins = np.histogram(alphaFres_arr, bins = 15)
@@ -669,11 +669,11 @@ class analyze_data(object):
         width = (max(alpha_x) - min(alpha_x))/20
         plt.bar(alpha_x, alpha_hist, width = width)
         plt.bar(alpha_x+width/2, err_sorted_scaled, width = width/5)
-        plt.xlabel(r'$\alpha$ (Fres fit)', fontsize=28)
-        plt.ylabel('Number of resonances', fontsize=28)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
-        plt.legend([r'$\alpha$','Fit error [a.u.]'], fontsize = 24)
+        plt.xlabel(r'$\alpha$ (Fres fit)', fontsize=34)
+        plt.ylabel('Number of resonances', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
+        plt.legend([r'$\alpha$','Fit error [a.u.]'], fontsize = 26)
         plt.grid()
         
         Delta_hist, Delta_bins = np.histogram(DeltaFres_arr, bins = 15)
@@ -688,11 +688,11 @@ class analyze_data(object):
         width = (max(Delta_x) - min(Delta_x))/20*1e3
         plt.bar(Delta_x*1e3, Delta_hist, width = width)
         plt.bar(Delta_x*1e3+width/2, err_sorted_scaled, width = width/5)
-        plt.xlabel(r'$\Delta$ (Fres fit) [meV]', fontsize=28)
-        plt.ylabel('Number of resonances', fontsize=28)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
-        plt.legend([r'$\Delta$','Fit error [a.u.]'], fontsize = 24)
+        plt.xlabel(r'$\Delta$ (Fres fit) [meV]', fontsize=34)
+        plt.ylabel('Number of resonances', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
+        plt.legend([r'$\Delta$','Fit error [a.u.]'], fontsize = 26)
         plt.grid()
         
         alphaQi_hist, alphaQi_bins = np.histogram(alphaQi_arr, bins = 15)
@@ -707,11 +707,11 @@ class analyze_data(object):
         width = (max(alphaQi_x) - min(alphaQi_x))/20
         plt.bar(alphaQi_x, alphaQi_hist, width = width)
         plt.bar(alphaQi_x+width/2, errQi_sorted_scaled, width = width/5)
-        plt.xlabel(r'$\alpha$ (Qi fit)', fontsize=28)
-        plt.ylabel('Number of resonances', fontsize=28)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
-        plt.legend([r'$\alpha$','Fit error [a.u.]'], fontsize = 24)
+        plt.xlabel(r'$\alpha$ (Qi fit)', fontsize=34)
+        plt.ylabel('Number of resonances', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
+        plt.legend([r'$\alpha$','Fit error [a.u.]'], fontsize = 26)
         plt.grid()
 
         max_deltaQi = 0.26e-3
@@ -729,11 +729,11 @@ class analyze_data(object):
         width = (max(DeltaQi_x*1e3) - min(DeltaQi_x*1e3))/20
         plt.bar(DeltaQi_x*1e3, DeltaQi_hist, width = width)
         plt.bar(DeltaQi_x*1e3+width/2, errQi_sorted_scaled, width = width/5)
-        plt.xlabel(r'$\Delta$ (Qi fit) [meV]', fontsize=28)
-        plt.ylabel('Number of resonances', fontsize=28)
-        plt.xticks(color='k', size=28)
-        plt.yticks(color='k', size=28)
-        plt.legend([r'$\Delta$','Fit error [a.u.]'], fontsize = 24)
+        plt.xlabel(r'$\Delta$ (Qi fit) [meV]', fontsize=34)
+        plt.ylabel('Number of resonances', fontsize=34)
+        plt.xticks(color='k', size=30)
+        plt.yticks(color='k', size=30)
+        plt.legend([r'$\Delta$','Fit error [a.u.]'], fontsize = 26)
         plt.grid()
                
         self.fig10 = fig10 
